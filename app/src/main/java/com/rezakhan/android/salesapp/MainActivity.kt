@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         login_btn.setOnClickListener {
-            var url = "http://192.168.8.100/salesweb/login.php?mobile=" + login_mobile.text.toString() +
+            var url = "http://192.168.0.104/salesweb/login.php?mobile=" + login_mobile.text.toString() +
                     "&password=" + login_password.text.toString()
 
             var rq : RequestQueue = Volley.newRequestQueue(this)

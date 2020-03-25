@@ -30,7 +30,7 @@ class ItemAdapter(var context:Context,var list:ArrayList<Item>) : RecyclerView.A
         {
             itemView.item_name.text = n
             itemView.item_price.text = p.toString()
-            var web : String="http://192.168.8.100/salesweb/images/" + u
+            var web : String="http://192.168.0.104/salesweb/images/" + u
             web = web.replace(" ","%20")
             Picasso.with(itemView.context).load(web).into(itemView.item_photo)
 

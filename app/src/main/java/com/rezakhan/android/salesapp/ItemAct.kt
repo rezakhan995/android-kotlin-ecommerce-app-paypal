@@ -19,7 +19,7 @@ class ItemAct : AppCompatActivity() {
         setContentView(R.layout.activity_item)
 
         var cat : String = intent.getStringExtra("cat")
-        var url = "http://192.168.8.100/salesweb/get_items.php?category=" + cat
+        var url = "http://192.168.0.104/salesweb/get_items.php?category=" + cat
         var list = ArrayList<Item>()
 
        var rq : RequestQueue = Volley.newRequestQueue(this)

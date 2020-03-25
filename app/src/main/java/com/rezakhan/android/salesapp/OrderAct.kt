@@ -47,13 +47,13 @@ class OrderAct : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item?.itemId==R.id.item_menu)
         {
-            var i = Intent(this,HomeAct::class.java)
+            var i = Intent(this, HomeAct::class.java)
             startActivity(i)
         }
 
         if(item?.itemId == R.id.item_cancel)
         {
-            var url = "http://192.168.8.100/SalesWeb/cancel_order.php?mobile=" + UserInfo.mobile
+            var url = "http://192.168.0.104/SalesWeb/cancel_order.php?mobile=" + UserInfo.mobile
             var rq : RequestQueue = Volley.newRequestQueue(this)
             var sr = StringRequest(Request.Method.GET, url, Response.Listener { response ->
                 var i = Intent(this, HomeAct::class.java)
@@ -66,7 +66,7 @@ class OrderAct : AppCompatActivity() {
 
         if(item?.itemId == R.id.item_confirm)
         {
-            var url = "http://192.168.8.100/salesweb/confirm_order.php?mobile=" + UserInfo.mobile
+            var url = "http://192.168.0.104/salesweb/confirm_order.php?mobile=" + UserInfo.mobile
             var rq : RequestQueue = Volley.newRequestQueue(this)
             var sr = StringRequest(Request.Method.GET, url, Response.Listener { response ->
                 var i = Intent(this, TotalAct::class.java)

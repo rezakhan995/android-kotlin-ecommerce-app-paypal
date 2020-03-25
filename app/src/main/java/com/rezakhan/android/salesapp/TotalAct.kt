@@ -26,7 +26,7 @@ class TotalAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_total)
 
-        var url="http://192.168.8.100/salesweb/get_total.php?bill_no=" + intent.getStringExtra("bno")
+        var url="http://192.168.0.104/salesweb/get_total.php?bill_no=" + intent.getStringExtra("bno")
         var rq: RequestQueue = Volley.newRequestQueue(this)
         var sr= StringRequest(Request.Method.GET,url, Response.Listener { response ->
 
