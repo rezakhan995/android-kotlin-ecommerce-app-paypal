@@ -23,21 +23,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         login_btn.setOnClickListener {
-            var url = "http://192.168.0.104/salesweb/login.php?mobile=" + login_mobile.text.toString() +
-                    "&password=" + login_password.text.toString()
+            var url = "http://192.168.0.104/salesweb/login.php"
 
             var rq : RequestQueue = Volley.newRequestQueue(this)
-            var sr = StringRequest(Request.Method.GET, url, Response.Listener { response ->
+            var sr = object: StringRequest(Request.Method.GET, url, Response.Listener { response ->
                 if(response.equals("0")) {
                     Toast.makeText(this, "Login Fail", Toast.LENGTH_LONG).show()
                 }else {
                     UserInfo.mobile = login_mobile.text.toString()
+                    UserInfo.access_token = response
                     var i = Intent(this, HomeAct::class.java)
                     startActivity(i)
                 }
             }, Response.ErrorListener { error ->
                 Toast.makeText(this,error.message, Toast.LENGTH_LONG).show()
-            })
+            }){
+                override fun getParams(): MutableMap<String, String> {
+                    var map = HashMap<String, String>()
+                    map.put("mobile", login_mobile.text.toString())
+                    map.put("password", login_password.text.toString())
+                    return map
+                }
+            }
             rq.add(sr)
         }
     }

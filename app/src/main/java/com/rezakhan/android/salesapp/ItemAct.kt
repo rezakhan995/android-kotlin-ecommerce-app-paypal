@@ -28,7 +28,7 @@ class ItemAct : AppCompatActivity() {
                 list.add(Item(response.getJSONObject(x).getInt("id"), response.getJSONObject(x).getString("name"),
                         response.getJSONObject(x).getDouble("price"), response.getJSONObject(x).getString("photo")))
 
-            var adp = ItemAdapter(this,list)
+            var adp = ItemAdapter(this, list)
             item_rv.layoutManager = LinearLayoutManager(this)
             item_rv.adapter = adp
 

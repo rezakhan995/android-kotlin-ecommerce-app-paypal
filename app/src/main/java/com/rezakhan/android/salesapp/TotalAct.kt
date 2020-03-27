@@ -19,8 +19,8 @@ import java.math.BigDecimal
 
 class TotalAct : AppCompatActivity() {
 
-    var config:PayPalConfiguration?=null
-    var amount:Double=0.0
+    var config: PayPalConfiguration? = null
+    var amount: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +38,18 @@ class TotalAct : AppCompatActivity() {
 
         rq.add(sr)
 
-        config=PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(UserInfo.client_id)
-        var i=Intent(this,PayPalService::class.java)
-        i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config)
+        config = PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(UserInfo.client_id)
+        var i = Intent(this, PayPalService::class.java)
+        i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
         startService(i)
 
         paypal_btn.setOnClickListener {
+            amount = total_tv.text.toString().toDouble()
+            var payment = PayPalPayment(BigDecimal.valueOf(amount),"USD","Ecommerce Sales App", PayPalPayment.PAYMENT_INTENT_SALE)
 
-            amount=total_tv.text.toString().toDouble()
-            var payment=PayPalPayment(BigDecimal.valueOf(amount),"USD","Udemy Sales App",PayPalPayment.PAYMENT_INTENT_SALE)
-
-            var intent=Intent(this,PaymentActivity::class.java)
-            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config)
-            intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payment)
+            var intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
+            intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
             startActivityForResult(intent,123)
 
         }
@@ -59,11 +58,11 @@ class TotalAct : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==123)
+        if(requestCode == 123)
         {
-            if(resultCode==Activity.RESULT_OK)
+            if(resultCode == Activity.RESULT_OK)
             {
-                var obj=Intent(this,ConfirmAct::class.java)
+                var obj = Intent(this, ConfirmAct::class.java)
                 startActivity(obj)
             }
         }

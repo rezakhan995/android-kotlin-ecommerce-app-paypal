@@ -40,15 +40,14 @@ class OrderAct : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.my_menu,menu)
+        menuInflater.inflate(R.menu.my_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId==R.id.item_menu)
-        {
-            var i = Intent(this, HomeAct::class.java)
-            startActivity(i)
+        if(item?.itemId == R.id.item_menu){
+            var intent = Intent(this, HomeAct::class.java);
+            startActivity(intent)
         }
 
         if(item?.itemId == R.id.item_cancel)
@@ -67,15 +66,14 @@ class OrderAct : AppCompatActivity() {
         if(item?.itemId == R.id.item_confirm)
         {
             var url = "http://192.168.0.104/salesweb/confirm_order.php?mobile=" + UserInfo.mobile
-            var rq : RequestQueue = Volley.newRequestQueue(this)
+            var rq: RequestQueue = Volley.newRequestQueue(this)
             var sr = StringRequest(Request.Method.GET, url, Response.Listener { response ->
-                var i = Intent(this, TotalAct::class.java)
-                i.putExtra("bno", response)
-                startActivity(i)
-            },Response.ErrorListener { error ->
+                var intent = Intent(this, TotalAct::class.java)
+                intent.putExtra("bno", response)
+                startActivity(intent)
+            }, Response.ErrorListener { error ->
                 Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
             })
-            rq.add(sr)
         }
         return super.onOptionsItemSelected(item)
     }
